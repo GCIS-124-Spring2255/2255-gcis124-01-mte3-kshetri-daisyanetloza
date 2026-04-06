@@ -14,11 +14,22 @@ public class KnockKnockServer {
     public static int PORT = 54322;
 
     public static void receiveAndSend(Scanner scanner,String message,PrintWriter writer,boolean concat) throws IOException {
+        writer.println(message);
+        writer.flush();
+        System.out.println("Sent: " + message);
+
+        scanner.nextLine();
+        System.out.println("Received: " + message);
+
+
+    } // receiveAndSend() method closed
+    
+    public static void main(String args[]) throws IOException {
         ServerSocket server = new ServerSocket(8081);
         Socket client = server.accept();
 
-        scanner = new Scanner(client.getInputStream());
-        message = scanner.nextLine();
+        Scanner scanner = new Scanner(client.getInputStream());
+        String message = scanner.nextLine();
         System.out.println(message);
 
         PrintWriter out = new PrintWriter(client.getOutputStream());
@@ -28,15 +39,6 @@ public class KnockKnockServer {
         scanner.close();
         server.close();
         client.close();
-
-
-    } // receiveAndSend() method closed
-    
-    public static void main(String args[]) throws IOException {
-        KnockKnockServer kks = new KnockKnockServer();
-        Scanner scanner = new Scanner();
-        PrintWriter pw = new PrintWriter();
-        kks.receiveAndSend(scanner, "hello", pw, true);
     
     } // main() method closed
 }

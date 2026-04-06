@@ -9,24 +9,27 @@ import java.net.Socket;
 import java.util.Random;
 import java.util.Scanner;
 
+import mte3.knockknock2.Joke;
+
 public class KnockKnockClient {
     public static int PORT = 54322;
     public static String SERVER = "localhost";
 
     public static void sendAndReceive(PrintWriter writer, String message, Scanner scanner) {
-        
-        // 
-        // 
-        // 
+        writer.println(message);
+        writer.flush();
+        System.out.println("Sent: " + message);
+
+        scanner.nextLine();
+        System.out.println("Received: " + message);
 
     } // sendAndReceive() method closed
     
 
     public static void joke(String who,String punchLine) throws IOException {
-        
-        //  
-        // 
-        // 
+        PrintWriter pw = new PrintWriter()
+        Scanner s = new Scanner();
+        sendAndReceive(pw, punchLine, s);
 
     } // joke() method closed
 
