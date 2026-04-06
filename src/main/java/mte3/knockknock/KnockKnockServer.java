@@ -25,7 +25,8 @@ public class KnockKnockServer {
     } // receiveAndSend() method closed
     
     public static void main(String args[]) throws IOException {
-        ServerSocket server = new ServerSocket(8081);
+        ServerSocket server = new ServerSocket(PORT);
+        System.out.println("Starting server ...");
         Socket client = server.accept();
 
         Scanner scanner = new Scanner(client.getInputStream());

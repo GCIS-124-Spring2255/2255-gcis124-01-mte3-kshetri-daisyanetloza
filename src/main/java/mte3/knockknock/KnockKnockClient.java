@@ -5,6 +5,7 @@ package mte3.knockknock;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Random;
 import java.util.Scanner;
@@ -27,9 +28,20 @@ public class KnockKnockClient {
     
 
     public static void joke(String who,String punchLine) throws IOException {
-        PrintWriter pw = new PrintWriter()
-        Scanner s = new Scanner();
-        sendAndReceive(pw, punchLine, s);
+        ServerSocket server = new ServerSocket(PORT);
+        Socket client = server.accept();
+
+        Scanner scanner = new Scanner(client.getInputStream());
+        String message = scanner.nextLine();
+        System.out.println(message);
+
+        PrintWriter out = new PrintWriter(client.getOutputStream());
+        out.println(message);
+        out.flush();
+
+        scanner.close();
+        server.close();
+        client.close();
 
     } // joke() method closed
 
